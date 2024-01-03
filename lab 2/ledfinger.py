@@ -5,7 +5,8 @@ import time
 import pyfirmata
 
 time.sleep(2.0)
-
+cap = cv2.VideoCapture(0)
+Nfing = 5
 mp_draw=mp.solutions.drawing_utils #use function drawing_utils to draw straight connect landmark point
 mp_hand=mp.solutions.hands #use function hands to find hand on camera
 
@@ -54,14 +55,13 @@ led_5=board.get_pin('d:9:o')
 #### LED write function
 
 ## controller.py ##
-cap = cv2.VideoCapture(0)
-Nfing = 5
+
 def led(led_1,led_2,led_3,led_4,led_5,led1,led2,led3,led4,led5):#creat condition to controll digital out put
-    led_1.wite(led1)
-    led_2.wite(led2)
-    led_3.wite(led3)
-    led_4.wite(led4)
-    led_5.wite(led5)
+    led_1.write(led1)
+    led_2.write(led2)
+    led_3.write(led3)
+    led_4.write(led4)
+    led_5.write(led5)
 
 while True:
     led1 = 0
@@ -134,8 +134,7 @@ while True:
     
     led(led_1,led_2,led_3,led_4,led_5,led1,led2,led3,led4,led5) #import function in module to control arduino output
     mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
-    cv2.putText(img, "charinrat", (400, 450), cv2.FONT_HERSHEY_PLAIN, 2,
-                (255,  255,102), 2)
+   
     cv2.imshow("Image", img)
     cv2.waitKey(1)
     
